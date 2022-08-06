@@ -6,6 +6,8 @@ use App\Models\Facture;
 use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
 
+use PDF;
+
 
 class FactureController extends Controller
 {
@@ -149,7 +151,21 @@ class FactureController extends Controller
      *
      */
     public function imprimerUneFacture($id){
+
         $factureAImprimer = Facture::find($id) ;
-        return view('siloe.facture.imprimer-facture')->with('factureAImprimer', $factureAImprimer) ;
+
+        //$factureAImprimer = Facture::where('id', 1)->first(); ;
+
+        //dd($factureAImprimer, compact('factureAImprimer'));
+
+        //$pdf = PDF::loadView('siloe.facture.imprimer-facture');
+
+        //return $pdf->download('tutsmake.pdf');
+        //return $pdf->stream('tutsmake.pdf');
+
+        //return view('siloe.facture.imprimer-facture')->with('factureAImprimer', $factureAImprimer) ;
+
+        $cheminFichier = 'app/public/facture-'.$id.'.pdf' ;
+        return Pdf::loadView('siloe.facture.imprimer-facture', compact('factureAImprimer'))->save(storage_path($cheminFichier))->stream('download.pdf');
     }
 }

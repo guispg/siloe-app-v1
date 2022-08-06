@@ -46,10 +46,10 @@
                                 <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Enregistrer un patient</a>
                             </div>
                             <div class="col-4">
-                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Liste des consultations</a>
+                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg" >?</a>
                             </div>
                             <div class="col-4">
-                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Demarrer une consultations</a>
+                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg" >?</a>
                             </div>
                         </div>
 

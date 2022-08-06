@@ -51,12 +51,12 @@
                             <div class="col-4">
                                 <a href="{{route('facture.creer')}}" class="btn btn-block btn-info btn-lg">Enregistrer une nouvelle facture</a>
                             </div>
-                            <div class="col-4">
-                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Liste des consultations</a>
+                            {{-- <div class="col-4">
+                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg" disabled>Liste des consultations</a>
                             </div>
                             <div class="col-4">
-                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Demarrer une consultations</a>
-                            </div>
+                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg" disabled>Demarrer une consultations</a>
+                            </div> --}}
                         </div>
 
                         <div class="row mt-6">

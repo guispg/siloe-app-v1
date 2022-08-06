@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>A simple, clean, and responsive HTML invoice template</title>
+		<title>SILOE | Facture</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 		<style>
 			.invoice-box {
@@ -143,7 +144,7 @@
 				<tr class="heading">
 					<td>Payment Method</td>
 
-					<td>Check #</td>
+					<td>{{$factureAImprimer->sejour}}</td>
 				</tr>
 
 				<tr class="details">
@@ -179,7 +180,7 @@
 				<tr class="total">
 					<td></td>
 
-					<td>Total: $385.00</td>
+					<td>Total: {{$factureAImprimer->montantTotal}}</td>
 				</tr>
 			</table>
 		</div>
