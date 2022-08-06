@@ -1,223 +1,187 @@
-<x-app-layout>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>A simple, clean, and responsive HTML invoice template</title>
 
+		<style>
+			.invoice-box {
+				max-width: 800px;
+				margin: auto;
+				padding: 30px;
+				border: 1px solid #eee;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+				font-size: 16px;
+				line-height: 24px;
+				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+				color: #555;
+			}
 
-    <div class="py-12">
+			.invoice-box table {
+				width: 100%;
+				line-height: inherit;
+				text-align: left;
+			}
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+			.invoice-box table td {
+				padding: 5px;
+				vertical-align: top;
+			}
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <!-- Google Font: Source Sans Pro -->
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-                <!-- Font Awesome -->
-                <link rel="stylesheet" href="{{asset("theme/adminlte/plugins/fontawesome-free/css/all.min.css")}}">
-                <!-- DataTables -->
-                <link rel="stylesheet" href="{{asset("theme/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css")}}">
-                <link rel="stylesheet" href="{{asset("theme/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css")}}">
-                <link rel="stylesheet" href="{{asset("theme/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css")}}">
-                <!-- Theme style -->
-                <link rel="stylesheet" href="{{asset("theme/adminlte/dist/css/adminlte.min.css")}}">
+			.invoice-box table tr td:nth-child(2) {
+				text-align: right;
+			}
 
-                <section class="content-header">
-                    <div class="container-fluid">
-                      <div class="row mb-2">
-                        <div class="col-sm-6">
-                          <h1>Imprimer une facture</h1>
-                        </div>
-                        <div class="col-sm-6">
-                          <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                            <li class="breadcrumb-item active">Liste facture</li>
-                          </ol>
-                        </div>
-                      </div>
-                    </div><!-- /.container-fluid -->
-                </section>
+			.invoice-box table tr.top table td {
+				padding-bottom: 20px;
+			}
 
+			.invoice-box table tr.top table td.title {
+				font-size: 45px;
+				line-height: 45px;
+				color: #333;
+			}
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        @if (session('succes'))
-                            <div class="alert alert-success">
-                                {{ session('succes') }}
-                            </div>
-                        @endif
+			.invoice-box table tr.information table td {
+				padding-bottom: 40px;
+			}
 
-                        <div class="row">
-                            <div class="col-4">
-                                <a href="{{route('facture.creer')}}" class="btn btn-block btn-info btn-lg">Enregistrer une nouvelle facture</a>
-                            </div>
-                            <div class="col-4">
-                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Liste des consultations</a>
-                            </div>
-                            <div class="col-4">
-                                <a href="{{route('patient.enregistrer')}}" class="btn btn-block btn-info btn-lg">Demarrer une consultations</a>
-                            </div>
-                        </div>
+			.invoice-box table tr.heading td {
+				background: #eee;
+				border-bottom: 1px solid #ddd;
+				font-weight: bold;
+			}
 
-                        <div class="row mt-6">
-                            <div class="col-12">
+			.invoice-box table tr.details td {
+				padding-bottom: 20px;
+			}
 
-                                <div class="card">
-                                    <div class="card-header">
-                                    <h3 class="card-title">Tableau affichant la liste des factures</h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="facture" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
+			.invoice-box table tr.item td {
+				border-bottom: 1px solid #eee;
+			}
 
-                                            <tbody>
-                                                <tr>
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <tr>
-                                                                    <td>{{$factureAImprimer->nomPrenom}} </td>
-                                                                    <td>{{$factureAImprimer->numeroDossier}} </td>
-                                                                    <td></td>
-                                                                </tr>
-                                                            </td>
+			.invoice-box table tr.item.last td {
+				border-bottom: none;
+			}
 
-                                                            <td> <tr><td>{{$factureAImprimer->montantTotal}} </td> <td></td> <td></td></tr> </td>
+			.invoice-box table tr.total td:nth-child(2) {
+				border-top: 2px solid #eee;
+				font-weight: bold;
+			}
 
-                                                            <td>
-                                                                <tr>
-                                                                    <td><a class="btn btn-outline-success" href="{{route('facture.modifier', ['id' => $factureAImprimer->id]) }}" role="button">Modifier</a></td>
-                                                                    <td><a class="btn btn-outline-success" href="{{route('facture.imprimer', ['id' => $factureAImprimer->id]) }}" role="button">Imprimer</a></td>
-                                                                    <td></td>
-                                                                </tr>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </tr>
-                                            </tbody>
+			@media only screen and (max-width: 600px) {
+				.invoice-box table tr.top table td {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
 
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                            </tfoot>
+				.invoice-box table tr.information table td {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
+			}
 
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <!-- /.card -->
+			/** RTL **/
+			.invoice-box.rtl {
+				direction: rtl;
+				font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			}
 
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-                </div>
-                <!-- /.content-wrapper -->
+			.invoice-box.rtl table {
+				text-align: right;
+			}
 
-            </div>
+			.invoice-box.rtl table tr td:nth-child(2) {
+				text-align: left;
+			}
+		</style>
+	</head>
 
-        </div>
+	<body>
+		<div class="invoice-box">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td class="title">
+									<img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+								</td>
 
-        <!-- jQuery -->
-        <script src="{{asset("theme/adminlte/plugins/jquery/jquery.min.js")}}"></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{asset("theme/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
-        <!-- DataTables  & Plugins -->
-        <script src="{{asset("theme/adminlte/plugins/datatables/jquery.dataTables.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/jszip/jszip.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/pdfmake/pdfmake.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/pdfmake/vfs_fonts.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-buttons/js/buttons.print.min.js")}}"></script>
-        <script src="{{asset("theme/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js")}}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{asset("theme/adminlte/dist/js/adminlte.min.js")}}"></script>
-        <!-- Page specific script -->
+								<td>
+									Invoice #: 123<br />
+									Created: January 1, 2015<br />
+									Due: February 1, 2015
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 
-        <script>
-            $(function () {
-                $("#facture").DataTable({
-                        "responsive": false,
-                        "lengthChange": false,
-                        "autoWidth": false,
-                        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                        "language": {
-                                "sProcessing":     "Traitement en cours...",
-                                "sSearch":         "Rechercher&nbsp;:",
-                                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-                                "sInfo":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                                "sInfoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                                "sInfoPostFix":    "",
-                                "sLoadingRecords": "Chargement en cours...",
-                                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
-                                "oPaginate": {
-                                    "sFirst":      "Premier",
-                                    "sPrevious":   "Pr&eacute;c&eacute;dent",
-                                    "sNext":       "Suivant",
-                                    "sLast":       "Dernier"
-                                },
-                                "oAria": {
-                                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
-                                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                                },
-                                "buttons": {
-                                    "collection": "Collection <span class='ui-button-icon-primary ui-icon ui-icon-triangle-1-s'\/>",
-                                    "colvis": "Colonne Visible",
-                                    "colvisRestore": "Restore visibility",
-                                    "copy": "Copier",
-                                    "copyKeys": "Press ctrl or u2318 + C to copy the table data to your system clipboard.<br><br>To cancel, click this message or press escape.",
-                                    "copySuccess": {
-                                        "1": "Copied 1 row to clipboard",
-                                        "_": "Copied %d rows to clipboard"
-                                    },
-                                    "copyTitle": "Copy to Clipboard",
-                                    "csv": "CSV",
-                                    "excel": "Excel",
-                                    "pageLength": {
-                                        "-1": "Show all rows",
-                                        "_": "Show %d rows"
-                                    },
-                                    "pdf": "PDF",
-                                    "print": "Imprimer",
-                                    "updateState": "Update",
-                                    "stateRestore": "State %d",
-                                    "savedStates": "Saved States",
-                                    "renameState": "Rename",
-                                    "removeState": "Remove",
-                                    "removeAllStates": "Remove All States",
-                                    "createState": "Create State"
-                                }, }
-                    }).buttons().container().appendTo('#facture_wrapper .col-md-6:eq(0)');
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>
+									Sparksuite, Inc.<br />
+									12345 Sunny Road<br />
+									Sunnyville, CA 12345
+								</td>
 
-                $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+								<td>
+									Acme Corp.<br />
+									John Doe<br />
+									john@example.com
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 
-                });
-            });
-        </script>
+				<tr class="heading">
+					<td>Payment Method</td>
 
-    </div>
-</x-app-layout>
+					<td>Check #</td>
+				</tr>
+
+				<tr class="details">
+					<td>Check</td>
+
+					<td>1000</td>
+				</tr>
+
+				<tr class="heading">
+					<td>Item</td>
+
+					<td>Price</td>
+				</tr>
+
+				<tr class="item">
+					<td>Website design</td>
+
+					<td>$300.00</td>
+				</tr>
+
+				<tr class="item">
+					<td>Hosting (3 months)</td>
+
+					<td>$75.00</td>
+				</tr>
+
+				<tr class="item last">
+					<td>Domain name (1 year)</td>
+
+					<td>$10.00</td>
+				</tr>
+
+				<tr class="total">
+					<td></td>
+
+					<td>Total: $385.00</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

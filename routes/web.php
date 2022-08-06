@@ -6,6 +6,8 @@ use App\Http\Controllers\ConsultationController;
 
 use App\Http\Controllers\FactureController;
 
+use App\Models\Facture;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +29,8 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('siloe.facture.liste-facture');
+        $toutesLesFactures = Facture::where('created_at', '!=', null)->orderBy('created_at', 'desc')->get() ;
+        return view('siloe.facture.liste-facture')->with('toutesLesFactures', $toutesLesFactures) ;
     })->name('dashboard');
 });
 
