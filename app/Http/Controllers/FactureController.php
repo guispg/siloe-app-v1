@@ -165,8 +165,8 @@ class FactureController extends Controller
         $dateSansHeure = substr($dateAvecHeure, 0, -5);
         //dd($dateSansHeure);
 
-        //$fmt = new NumberFormatter( 'fr_FR', NumberFormatter::CURRENCY );
-        //$montantTotalFormatter = $fmt->formatCurrency($factureAImprimer->montantTotal, "XOF");
+        $fmt = new NumberFormatter( 'fr_FR', NumberFormatter::CURRENCY );
+        $montantTotalFormatter = $fmt->formatCurrency($factureAImprimer->montantTotal, "XOF");
         //dd($montantTotalFormatter);
 
         //$factureAImprimer = Facture::where('id', 1)->first(); ;
