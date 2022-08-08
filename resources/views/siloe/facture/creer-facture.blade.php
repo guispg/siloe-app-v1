@@ -25,11 +25,11 @@
                     <div class="container-fluid">
                       <div class="row mb-2">
                         <div class="col-sm-6">
-                          <h1>Tableau</h1>
+                          <h1>Tableau de bord</h1>
                         </div>
                         <div class="col-sm-6">
                           <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Accueil</a></li>
                             <li class="breadcrumb-item active">Enregistrer une Facture</li>
                           </ol>
                         </div>
@@ -71,7 +71,7 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="{{route('facture.liste')}}" class="btn btn-block btn-info btn-lg">Liste des factures</a>
+                                    <a href="{{route('dashboard')}}" class="btn btn-block btn-info btn-lg">Liste des factures</a>
                                 </div>
                                 <!-- left column -->
                                 <div class="col-md-8">
@@ -79,70 +79,111 @@
                                   <!-- general form elements -->
                                     <div class="card card-info">
                                         <div class="card-header">
-                                        <h3 class="card-title">Formulaire pour enregistrement une nouvelle facture</h3>
+                                            <h3 class="card-title">Formulaire pour enregistrement une nouvelle facture</h3>
                                         </div>
                                         <!-- /.card-header -->
                                         <!-- form start -->
                                         <form action="{{route('facture.enregistrer')}}" method="POST" >
                                             @csrf
 
-                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="nomPrenom">NOM ET PRENOM <code> @error('nomPrenom') <div class="alert alert-danger">{{ $message }}</div> @enderror </code> </label>
+                                                            <input type="text" class="form-control form-control-border border-width-2 @error('nomPrenom') is-invalid @enderror" id="nomPrenom" name="nomPrenom" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="numeroDossier">DOSSIER N° : <code></code></label>
+                                                            <input type="text" class="form-control form-control-border border-width-2" id="numeroDossier" name="numeroDossier" >
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                            <div class="form-group">
-                                                <label for="nomPrenom">NOM ET PRENOM <code> @error('nomPrenom') <div class="alert alert-danger">{{ $message }}</div> @enderror </code> </label>
-                                                <input type="text" class="form-control form-control-border border-width-2 @error('nomPrenom') is-invalid @enderror" id="nomPrenom" name="nomPrenom" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="numeroDossier">DOSSIER N° : <code></code></label>
-                                                <input type="text" class="form-control form-control-border border-width-2" id="numeroDossier" name="numeroDossier" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="matricule">MATRICULE : <code></code></label>
-                                                <input type="text" class="form-control form-control-border border-width-2" id="matricule" name="matricule" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="objet">OBJET : <code></code></label>
-                                                <input type="text" class="form-control form-control-border border-width-2" id="objet" name="objet" >
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col"></div>
+                                                </div>
 
 
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="matricule">MATRICULE : <code></code></label>
+                                                            <input type="text" class="form-control form-control-border border-width-2" id="matricule" name="matricule" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-8">
+                                                        <div class="form-group">
+                                                            <label for="objet">OBJET : <code></code></label>
+                                                            <input type="text" class="form-control form-control-border border-width-2" id="objet" name="objet" >
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                            <div class="form-group">
-                                                <label for="consultation">CONSULTATION <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="consultation" name="consultation" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="sejour">SEJOUR <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="sejour" name="sejour" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="ami">AMI <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="ami" name="ami" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="pharmacie">PHARMACIE <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="pharmacie" name="pharmacie" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="examinBiologique">EXAMIN BIOLOGIQUE <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="examinBiologique" name="examinBiologique" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="pocheDeSang">POCHE DE SANG <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="pocheDeSang" name="pocheDeSang" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="acteDeTransfusion">ACTE DE TRANSFUSION <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="acteDeTransfusion" name="acteDeTransfusion" >
-                                            </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="consultation">CONSULTATION <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="consultation" name="consultation" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="sejour">SEJOUR <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="sejour" name="sejour" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="ami">AMI <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="ami" name="ami" >
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                            <div class="form-group">
-                                                <label for="aavancePayee">AVANCE PAYEE <code></code></label>
-                                                <input type="number" class="form-control form-control-border border-width-2" id="aavancePayee" name="aavancePayee" >
-                                            </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="pharmacie">PHARMACIE <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="pharmacie" name="pharmacie" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="examinBiologique">EXAMIN BIOLOGIQUE <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="examinBiologique" name="examinBiologique" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="pocheDeSang">POCHE DE SANG <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="pocheDeSang" name="pocheDeSang" >
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                        </div>
-                                        <!-- /.card-body -->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="acteDeTransfusion">ACTE DE TRANSFUSION <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="acteDeTransfusion" name="acteDeTransfusion" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="aavancePayee">AVANCE PAYEE <code></code></label>
+                                                            <input type="number" class="form-control form-control-border border-width-2" id="aavancePayee" name="aavancePayee" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-4"></div>
+                                                </div>
+
+
+                                            </div>
+                                            <!-- /.card-body -->
 
                                         <button type="submit" class="btn btn-block btn-info btn-lg">Enregistrer la facture</button>
 

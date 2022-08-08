@@ -44,7 +44,7 @@
 			}
 
 			.invoice-box table tr.information table td {
-				padding-bottom: 40px;
+				padding-bottom: 0px;
 			}
 
 			.invoice-box table tr.heading td {
@@ -112,30 +112,33 @@
 								</td>
 
 								<td>
-									Invoice #: 123<br />
-									Created: January 1, 2015<br />
-									Due: February 1, 2015
+									CLINIQUE MEDICALE SILOE SARL
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 
+                <tr> <td colspan="2" style="text-align:right ; margin-bottom: 10px">date ici</td> </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center; margin-bottom: 10px">FACTURE N° 00000{{$factureAImprimer->id}}</td>
+                </tr>
+
 				<tr class="information">
 					<td colspan="2">
 						<table>
 							<tr>
-								<td>
-									Sparksuite, Inc.<br />
-									12345 Sunny Road<br />
-									Sunnyville, CA 12345
-								</td>
-
-								<td>
-									Acme Corp.<br />
-									John Doe<br />
-									john@example.com
-								</td>
+								<td>NOM ET PRENOM : {{$factureAImprimer->nomPrenom}}</td>
+								<td>N° DOSSIER : {{$factureAImprimer->numeroDossier}}</td>
+							</tr>
+							<tr>
+								<td>MATRICULE : {{$factureAImprimer->matricule}}</td>
+								<td></td>
+							</tr>
+							<tr >
+								<td style="padding-bottom: 10px">OBJET : {{$factureAImprimer->objet}}</td>
+								<td></td>
 							</tr>
 						</table>
 					</td>
@@ -143,46 +146,44 @@
 
 				<tr class="heading">
 					<td>Payment Method</td>
-
 					<td>{{$factureAImprimer->sejour}}</td>
 				</tr>
 
 				<tr class="details">
 					<td>Check</td>
-
 					<td>1000</td>
 				</tr>
 
 				<tr class="heading">
-					<td>Item</td>
-
-					<td>Price</td>
+					<td>DESIGNATION</td>
+					<td>PRIX</td>
 				</tr>
 
 				<tr class="item">
-					<td>Website design</td>
-
-					<td>$300.00</td>
+					<td>CONSULTATION</td>
+					<td>{{$factureAImprimer->consultation}}</td>
 				</tr>
 
 				<tr class="item">
-					<td>Hosting (3 months)</td>
-
-					<td>$75.00</td>
+					<td>SEJOUR</td>
+					<td>{{$factureAImprimer->sejour}}</td>
 				</tr>
 
 				<tr class="item last">
-					<td>Domain name (1 year)</td>
-
-					<td>$10.00</td>
+					<td>AMI</td>
+					<td>{{$factureAImprimer->ami}}</td>
 				</tr>
 
 				<tr class="total">
 					<td></td>
-
 					<td>Total: {{$factureAImprimer->montantTotal}}</td>
 				</tr>
 			</table>
+            <h4>La présente facture à la somme de :<br/> cent trente mille</h4>
+            <table>
+                <tr><td>REMISE</td><td>0</td></tr>
+                <tr><td>NET A PAYER</td><td>133 000</td></tr>
+            </table>
 		</div>
 	</body>
 </html>
