@@ -7,6 +7,8 @@ use App\Http\Requests\StoreFactureRequest;
 use App\Http\Requests\UpdateFactureRequest;
 
 use PDF;
+use \NumberFormatter;
+use Carbon\Carbon;
 
 
 class FactureController extends Controller
@@ -154,6 +156,19 @@ class FactureController extends Controller
 
         $factureAImprimer = Facture::find($id) ;
 
+        //montant total converti de chiffre en lettre
+        $f = new NumberFormatter("fr", NumberFormatter::SPELLOUT);
+        $montantEnLettre = $f->format($factureAImprimer->montantTotal);
+
+        // date convertie de chiffre en lettre
+        $dateAvecHeure = Carbon::now()->locale('fr_FR')->isoFormat('LLLL'); // 'mardi 23 juillet 2019 14:51'
+        $dateSansHeure = substr($dateAvecHeure, 0, -5);
+        //dd($dateSansHeure);
+
+        $fmt = new NumberFormatter( 'fr_FR', NumberFormatter::CURRENCY );
+        $montantTotalFormatter = $fmt->formatCurrency($factureAImprimer->montantTotal, "XOF");
+        //dd($montantTotalFormatter);
+
         //$factureAImprimer = Facture::where('id', 1)->first(); ;
 
         //dd($factureAImprimer, compact('factureAImprimer'));
@@ -166,6 +181,6 @@ class FactureController extends Controller
         //return view('siloe.facture.imprimer-facture')->with('factureAImprimer', $factureAImprimer) ;
 
         $cheminFichier = 'app/public/facture-'.$id.'.pdf' ;
-        return Pdf::loadView('siloe.facture.imprimer-facture', compact('factureAImprimer'))->save(storage_path($cheminFichier))->stream('download.pdf');
+        return Pdf::loadView('siloe.facture.imprimer-facture', compact('factureAImprimer', 'montantEnLettre', 'dateSansHeure', 'montantTotalFormatter'))->save(storage_path($cheminFichier))->stream('download.pdf');
     }
 }

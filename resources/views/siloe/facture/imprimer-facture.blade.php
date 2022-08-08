@@ -34,7 +34,7 @@
 			}
 
 			.invoice-box table tr.top table td {
-				padding-bottom: 20px;
+				padding-bottom: 10px;
 			}
 
 			.invoice-box table tr.top table td.title {
@@ -97,6 +97,8 @@
 			.invoice-box.rtl table tr td:nth-child(2) {
 				text-align: left;
 			}
+
+
 		</style>
 	</head>
 
@@ -105,13 +107,13 @@
 			<table cellpadding="0" cellspacing="0">
 				<tr class="top">
 					<td colspan="2">
-						<table>
+						<table id>
 							<tr>
 								<td class="title">
-									<img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+									<img src="{{public_path('theme/logo/SiloeLogo.png')}}" style="width: 120px; max-width: 200px" />
 								</td>
 
-								<td>
+								<td style="font-size: 1.5em">
 									CLINIQUE MEDICALE SILOE SARL
 								</td>
 							</tr>
@@ -119,7 +121,9 @@
 					</td>
 				</tr>
 
-                <tr> <td colspan="2" style="text-align:right ; margin-bottom: 10px">date ici</td> </tr>
+                <tr> <td colspan="2" style="text-align:right ; margin-bottom: 10px">
+                    {{$dateSansHeure}}
+                </td> </tr>
 
                 <tr>
                     <td colspan="2" style="text-align: center; margin-bottom: 10px">FACTURE N° 00000{{$factureAImprimer->id}}</td>
@@ -144,15 +148,7 @@
 					</td>
 				</tr>
 
-				<tr class="heading">
-					<td>Payment Method</td>
-					<td>{{$factureAImprimer->sejour}}</td>
-				</tr>
 
-				<tr class="details">
-					<td>Check</td>
-					<td>1000</td>
-				</tr>
 
 				<tr class="heading">
 					<td>DESIGNATION</td>
@@ -179,10 +175,21 @@
 					<td>Total: {{$factureAImprimer->montantTotal}}</td>
 				</tr>
 			</table>
-            <h4>La présente facture à la somme de :<br/> cent trente mille</h4>
+            <h4>La présente facture à la somme de :<br/> {{$montantEnLettre}} f cfa</h4>
+
+            <table id="remise">
+                <tr ><td style="border: 1px solid;">REMISE</td><td style="border: 1px solid;">0</td></tr>
+                <tr><td style="border: 1px solid;">NET A PAYER</td><td style="border: 1px solid;">{{$factureAImprimer->montantTotal}} FCFA</td></tr>
+            </table>
+
             <table>
-                <tr><td>REMISE</td><td>0</td></tr>
-                <tr><td>NET A PAYER</td><td>133 000</td></tr>
+                <tr><td colspan="2" style="text-align:right ; margin-bottom: 10px; ; padding-top: 50px">DIRECTEUR</td></tr>
+            </table>
+
+            <table cellpadding="0" cellspacing="0" style="margin-top: 90px; padding: 0; border-spacing: 0;">
+                <tr><td style="text-align: center; font-size: 0.7em">Sarl au capital de 1 000 000 de FCFA, YOPOUGON SIDECI Terminus de bus 42, 01 BP 1613 ABIDJAN 01 - Fax : 27 23 45 61 74 <br/>
+                Tel : 27 23 52 00 09 / 05 45 30 50 07 <br/>
+                RCCM : 2012-81510 / CC:141260G ECOBANK : 01039 120208019001-36 </td></tr>
             </table>
 		</div>
 	</body>

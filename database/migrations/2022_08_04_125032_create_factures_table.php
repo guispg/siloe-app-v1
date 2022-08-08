@@ -29,9 +29,13 @@ return new class extends Migration
             $table->mediumInteger('acteDeTransfusion')->nullable();
 
             $table->mediumInteger('montantTotal');
-            $table->mediumInteger('aavancePayee')->nullable();
+            $table->mediumInteger('avancePayee')->nullable();
             $table->mediumInteger('resteAPayer')->nullable();
             $table->mediumInteger('netAPayer');
+
+            //
+            $table->mediumInteger('remise')->default(0) ;
+
 
             $table->timestamps();
         });
